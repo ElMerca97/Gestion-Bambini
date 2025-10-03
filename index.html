@@ -3,194 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jardín Maternal Bambini</title>
+    <title>Jardín Maternal Bambini | Dashboard</title>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Estilos específicos para el Navbar de la página principal */
+        .navbar {
+            display: flex;
+            justify-content: space-between; /* Añadido para separar los botones */
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 15px 30px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .navbar .btn-primary {
+            padding: 12px 30px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>👶 Jardín Maternal Bambini</h1>
-            <p>Gestión Educativa para la Primera Infancia</p>
+            <p>Dashboard de Estadísticas</p>
+            <button class="btn btn-danger" onclick="borrarTodoLocalStorage()"
+                style="padding: 5px 15px; font-size: 0.9em; margin-left: 20px;">
+                🗑️ Borrar Todos los Datos
+            </button>
         </header>
 
-        <div class="tabs">
-            <button class="tab active" onclick="cambiarSeccion('ninos')">👶 Niños</button>
-            <button class="tab" onclick="cambiarSeccion('maestros')">👨‍🏫 Maestros</button>
-            <button class="tab" onclick="cambiarSeccion('clases')">📚 Clases</button>
-            <button class="tab" onclick="cambiarSeccion('asistencia')">📋 Asistencia</button>
+        <div class="navbar">
+            <button class="btn btn-primary" onclick="descargarReportePDF()" style="background: #003366;">
+                📥 Descargar Reporte Completo (PDF)
+            </button>
+            <a 
+                class="btn btn-primary" 
+                onclick="solicitarAccesoGestion()"
+            >
+                🛠️ Ir a Gestión de Datos
+            </a>
         </div>
 
         <div class="content">
-            <div id="ninos" class="section active">
-                <h2>Registro de Niños</h2>
-                <form id="formNino" onsubmit="guardarNino(event)">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Nombre completo *</label>
-                            <input type="text" id="nombreNino" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Fecha de nacimiento *</label>
-                            <input type="date" id="fechaNacNino" required>
-                        </div>
+            <div id="estadisticas" class="section active">
+                <h2>📈 Resumen de la Gestión</h2>
+                <div class="cards-grid" id="resumenEstadisticas">
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Nombre del tutor *</label>
-                            <input type="text" id="tutorNino" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Teléfono contacto *</label>
-                            <input type="text" id="telefonoNino" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Dirección</label>
-                        <input type="text" id="direccionNino">
-                    </div>
-                    <div class="form-group">
-                        <label>Foto del niño (PNG)</label>
-                        <input type="file" id="fotoNino" accept=".png">
-                    </div>
-                    <div class="form-group">
-                        <label>Observaciones</label>
-                        <textarea id="observacionesNino"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">💾 Guardar Niño</button>
-                </form>
-
-                <h2 style="margin-top: 40px;">Lista de Niños</h2>
-                <div id="listaNinos" class="cards-grid"></div>
-            </div>
-
-            <div id="maestros" class="section">
-                <h2>Registro de Maestros</h2>
-                <form id="formMaestro" onsubmit="guardarMaestro(event)">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Nombre completo *</label>
-                            <input type="text" id="nombreMaestro" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Cédula/DNI *</label>
-                            <input type="text" id="cedulaMaestro" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Teléfono *</label>
-                            <input type="text" id="telefonoMaestro" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="text" id="emailMaestro">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Especialidad</label>
-                        <input type="text" id="especialidadMaestro" placeholder="Ej: Educación Inicial, Música, etc.">
-                    </div>
-                    <div class="form-group">
-                        <label>Foto del maestro (PNG)</label>
-                        <input type="file" id="fotoMaestro" accept=".png">
-                    </div>
-                    <button type="submit" class="btn btn-primary">💾 Guardar Maestro</button>
-                </form>
-
-                <h2 style="margin-top: 40px;">Lista de Maestros</h2>
-                <div id="listaMaestros" class="cards-grid"></div>
-            </div>
-
-            <div id="clases" class="section">
-                <h2>Registro de Clases</h2>
-                <form id="formClase" onsubmit="guardarClase(event)">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Nombre de la clase *</label>
-                            <input type="text" id="nombreClase" required placeholder="Ej: Sala Amarilla">
-                        </div>
-                        <div class="form-group">
-                            <label>Maestro asignado *</label>
-                            <select id="maestroClase" required>
-                                <option value="">Seleccionar maestro</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Horario entrada *</label>
-                            <input type="time" id="horaEntrada" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Horario salida *</label>
-                            <input type="time" id="horaSalida" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Capacidad máxima</label>
-                        <input type="text" id="capacidadClase" placeholder="Ej: 20 niños">
-                    </div>
-                    <button type="submit" class="btn btn-primary">💾 Guardar Clase</button>
-                </form>
-
-                <h2 style="margin-top: 40px;">Lista de Clases</h2>
-                <div id="listaClases" class="cards-grid"></div>
-            </div>
-
-            <div id="asistencia" class="section">
-                <h2>Registro de Asistencia</h2>
-                <form id="formAsistencia" onsubmit="guardarAsistencia(event)">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Niño *</label>
-                            <select id="ninoAsistencia" required>
-                                <option value="">Seleccionar niño</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Fecha *</label>
-                            <input type="date" id="fechaAsistencia" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Hora de entrada</label>
-                            <input type="time" id="horaEntradaAsistencia">
-                        </div>
-                        <div class="form-group">
-                            <label>Hora de salida</label>
-                            <input type="time" id="horaSalidaAsistencia">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Estado</label>
-                        <select id="estadoAsistencia">
-                            <option value="presente">Presente</option>
-                            <option value="ausente">Ausente</option>
-                            <option value="tardanza">Tardanza</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">💾 Registrar Asistencia</button>
-                </form>
-
-                <h2 style="margin-top: 40px;">Historial de Asistencia</h2>
-                <table class="asistencia-table" id="tablaAsistencia">
+                
+                <h2 style="margin-top: 40px;">⏱️ Horas Trabajadas por Maestro (Última Semana)</h2>
+                <table class="asistencia-table" id="tablaHorasTrabajadas">
                     <thead>
                         <tr>
-                            <th>Fecha</th>
-                            <th>Niño</th>
-                            <th>Entrada</th>
-                            <th>Salida</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
+                            <th>Maestro</th>
+                            <th>Lunes</th>
+                            <th>Martes</th>
+                            <th>Miércoles</th>
+                            <th>Jueves</th>
+                            <th>Viernes</th>
+                            <th>Total Semanal</th>
                         </tr>
                     </thead>
-                    <tbody id="bodyAsistencia"></tbody>
+                    <tbody id="bodyHorasTrabajadas">
+                        </tbody>
                 </table>
             </div>
         </div>
     </div>
 
     <script src="js/scripts.js"></script>
+
+    <script>
+        // Lógica de acceso directo en index.html
+        function solicitarAccesoGestion() {
+            const claveIngresada = prompt("⚠️ Ingresa la clave de acceso para ir a Gestión de Datos:");
+            const claveCorrecta = "admin"; 
+
+            if (claveIngresada === claveCorrecta) {
+                window.location.href = 'gestion.html';
+            } else if (claveIngresada !== null) {
+                alert('🚫 Clave incorrecta. Acceso denegado.');
+            }
+        }
+        
+        // Llamada inicial para cargar el dashboard
+        window.onload = function() {
+            mostrarEstadisticas();
+        };
+    </script>
 </body>
 </html>

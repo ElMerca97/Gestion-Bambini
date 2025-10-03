@@ -6,8 +6,8 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Paleta de Jardín Maternal: Azul Claro / Verde Claro */
-    background: linear-gradient(135deg, #ADD8E6 0%, #90EE90 100%);
+    /* Degradado de fondo suave con tonos del logo (Naranja y Azul claro) */
+    background: linear-gradient(135deg, #FF9900 0%, #ADD8E6 100%);
     min-height: 100vh;
     padding: 20px;
 }
@@ -22,8 +22,8 @@ body {
 }
 
 header {
-    /* Paleta de Jardín Maternal: Azul Claro / Verde Claro */
-    background: linear-gradient(135deg, #ADD8E6 0%, #90EE90 100%);
+    /* Fondo de la cabecera: Naranja y Azul Oscuro */
+    background: linear-gradient(135deg, #FF6900 0%, #003366 100%);
     color: white;
     padding: 30px;
     text-align: center;
@@ -59,10 +59,10 @@ header h1 {
 
 .tab.active {
     background: white;
-    /* Color de Acento: Rosa Vibrante */
-    color: #FF69B4; 
-    /* Color de Acento: Rosa Vibrante */
-    border-bottom: 3px solid #FF69B4;
+    /* Color de Acento: Naranja Vibrante */
+    color: #FF6900; 
+    /* Borde de Acento: Naranja Vibrante */
+    border-bottom: 3px solid #FF6900;
 }
 
 .content {
@@ -106,8 +106,8 @@ input:focus,
 select:focus,
 textarea:focus {
     outline: none;
-    /* Color de Acento: Rosa Vibrante */
-    border-color: #FF69B4;
+    /* Color de Acento: Naranja Vibrante */
+    border-color: #FF6900;
 }
 
 textarea {
@@ -123,18 +123,20 @@ textarea {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .btn-primary {
-    /* Degradado de Acento: Rosa Vibrante / Azul Claro */
-    background: linear-gradient(135deg, #FF69B4 0%, #ADD8E6 100%);
+    /* Degradado de Acento: Naranja Vibrante / Azul Oscuro */
+    background: linear-gradient(135deg, #FF6900 0%, #003366 100%);
     color: white;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    /* Sombra de Acento: Rosa Vibrante */
-    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+    /* Sombra de Acento: Naranja Vibrante */
+    box-shadow: 0 5px 15px rgba(255, 105, 0, 0.4);
 }
 
 .btn-danger {
@@ -183,13 +185,13 @@ textarea {
     border-radius: 50%;
     object-fit: cover;
     margin-right: 15px;
-    /* Borde de Acento: Rosa Vibrante */
-    border: 3px solid #FF69B4;
+    /* Borde de Acento: Naranja Vibrante */
+    border: 3px solid #FF6900;
 }
 
 .card-image.placeholder {
-    /* Degradado de Acento: Rosa Vibrante / Azul Claro */
-    background: linear-gradient(135deg, #FF69B4 0%, #ADD8E6 100%);
+    /* Degradado de Acento: Naranja Vibrante / Azul Oscuro */
+    background: linear-gradient(135deg, #FF6900 0%, #003366 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -199,8 +201,8 @@ textarea {
 }
 
 .card-info h3 {
-    /* Color de Acento: Rosa Vibrante */
-    color: #FF69B4;
+    /* Color de Acento: Naranja Vibrante */
+    color: #FF6900;
     margin-bottom: 5px;
 }
 
@@ -294,4 +296,49 @@ textarea {
 .badge-warning {
     background: #fff3cd;
     color: #856404;
+}
+
+.nav-link {
+    /* Enlaces dentro del header o navegación secundaria */
+    color: white; 
+    text-decoration: underline;
+    transition: opacity 0.3s;
+}
+
+.nav-link:hover {
+    opacity: 0.8;
+}
+
+/* Estilo para los menús de gestión.html */
+.gestion-menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 50px;
+    text-align: center;
+}
+.menu-item {
+    display: block;
+    padding: 40px 20px;
+    border-radius: 15px;
+    text-decoration: none;
+    color: #495057;
+    background: #f0f8ff; /* Fondo Azul muy claro */
+    transition: all 0.3s;
+    border: 2px solid #dee2e6;
+}
+.menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 105, 0, 0.3); /* Sombra Naranja */
+    border-color: #FF6900;
+}
+.menu-item h3 {
+    font-size: 1.5em;
+    margin-top: 15px;
+    color: #003366; /* Azul Oscuro para el texto */
+}
+.menu-item span {
+    font-size: 3em;
+    display: block;
+    color: #FF6900; /* Naranja para los íconos */
 }
